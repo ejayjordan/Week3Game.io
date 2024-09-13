@@ -52,31 +52,34 @@ function flipCard() {
   if (!firstCard) {
     firstCard = this;
     return;
+  }else{
+    lockBoard = false;
+    secondCard = this;
   }
-
-  secondCard = this;
-  score++;
-  document.querySelector(".score").textContent = score;
+  
   lockBoard = true;
-
   checkForMatch();
 }
 
 function checkForMatch() {
-  let isMatch = firstCard.dataset.name === secondCard.dataset.name;
-
-  isMatch ? disableCards() : unflipCards();
+    let isMatch = firstCard.dataset.name === secondCard.dataset.name
+    if (isMatch) {
+        score++
+        document.querySelector(".score").textContent = score;
+        removeCards()
+    }else{
+        unflipCards()
+    }
 }
 
-function disableCards() {
-  firstCard.removeEventListener("click", flipCard);
-  secondCard.removeEventListener("click", flipCard);
-
+function removeCards() {
+  //figure out how to remove cards
   resetBoard();
 }
 
 function unflipCards() {
   setTimeout(() => {
+    //remove text/imgs??
     firstCard.classList.remove("flipped");
     secondCard.classList.remove("flipped");
     resetBoard();
