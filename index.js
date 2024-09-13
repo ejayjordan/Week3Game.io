@@ -78,7 +78,8 @@ function checkForMatch() {
 }
 
 function removeCards() {
-  //figure out how to remove cards
+  firstCard.style.display = "none"
+  secondCard.style.display = "none"
   resetBoard();
 }
 
