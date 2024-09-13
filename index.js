@@ -4,6 +4,9 @@ let firstCard, secondCard;
 let lockBoard = false;
 let score = 0;
 
+var correct = new Audio("../audio/335908__littlerainyseasons__correct.mp3")
+var incorrect = new Audio("../audio/734444__universfield__error-9.mp3")
+
 document.querySelector(".score").textContent = score;
 
 fetch("./data/cards.json")
@@ -64,10 +67,12 @@ function flipCard() {
 function checkForMatch() {
     let isMatch = firstCard.dataset.name === secondCard.dataset.name
     if (isMatch) {
+        correct.play()
         score++
         document.querySelector(".score").textContent = score;
         removeCards()
     }else{
+        incorrect.play()
         unflipCards()
     }
 }
@@ -79,7 +84,6 @@ function removeCards() {
 
 function unflipCards() {
   setTimeout(() => {
-    //remove text/imgs??
     firstCard.classList.remove("flipped");
     secondCard.classList.remove("flipped");
     resetBoard();
